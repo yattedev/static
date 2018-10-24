@@ -10,6 +10,7 @@ const Login = () => (
         <label for="pass">pass</label>
         <input type="pass" id="pass" name="pass"/>
       </div>
+      <input type='submit' value='ログイン'/>
     </form>
   </div>
 );
