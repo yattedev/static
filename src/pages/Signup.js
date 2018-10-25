@@ -25,7 +25,7 @@ class Login extends React.Component{
 
     fetch(this.state.url, {
       headers: new Headers({
-        'Content-Type':'applicatuib/json'
+        'Content-Type':'application/json'
       }),
       method: 'POST',
       body: JSON.stringify({'email':this.state.email,'password':this.state.pass})
