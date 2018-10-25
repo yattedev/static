@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 
-class Signup extends React.Component{
+class Login extends React.Component{
 
   constructor(){
     super();
     this.state = {
       email:"",
-      pass:""
+      pass:"",
+      test:"",
+      url:"http://localhost:3000/Auth"
     }
   }
 
@@ -18,23 +20,49 @@ class Signup extends React.Component{
   }
   submit (e) {
     this.setState({
-      test:email + pass
+      test:this.state.email + this.state.pass
     })
 
+    fetch(this.state.url, {
+      headers: new Headers({
+        'Content-Type':'applicatuib/json'
+      }),
+      method: 'POST',
+      body: JSON.stringify({'email':this.state.email,'pass':this.state.pass})
+    })
+    .catch((e) => {
+      throw Error(e);
+    })
+    .then(res => {
+      if(res.status != 404){
+        res.json()
+        .then(json => {
+          console.log(json)
+          localStorage.setItem('json',json());
+        })
+      }
+    })
     e.preventDefault()
   }
+
   render(){
     return(
       <div className='Signup-form'>
-        <form>
-          <label for='email'>email</label>
-          <input type='text' value={this.state.email} onChange={e => this.emailUpdate(e)} />
-          <label for='pass'>pass</label>
-          <input type='pass' value={this.state.pass} onChange={e => this.passUpdate(e)} />
+        <form onSubmit={e => this.submit(e)}>
+          <div>
+            <label>email</label>
+            <input type='text' value={this.state.email} onChange={e => this.emailUpdate(e)} />
+          </div>
+          <div>
+            <label>pass</label>
+            <input type='pass' value={this.state.pass} onChange={e => this.passUpdate(e)} />
+          </div>
+          <input type='submit' value='send'/>
         </form>
+        {this.state.test}
       </div>
     )
   }
 }
 
-export default Signup;
+export default Login;
