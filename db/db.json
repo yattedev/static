@@ -1,1 +1,6 @@
-{"scenario":[{"title":"test","date":"2000/00/00/00:00:00","path":"http://","user":"test"},{"title":"test","date":"2000/00/00/00:00:00","path":"http://","user":"test"}]}
+{
+  "scenario":[
+    {"title":"test","date":"2000/00/00/00:00:00","path":"http://","user":"test"},
+    {"title":"test","date":"2000/00/00/00:00:00","path":"http://","user":"test"}
+  ]
+}

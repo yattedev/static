@@ -1,38 +1,46 @@
 import React, { Component } from 'react';
-import ScenarioCard from '../molecules/ScenarioCard'
-
+import ScenarioCardList from '../organisms/ScenarioCardList'
 
 class Scenario extends React.Component{
   constructor(){
     super();
     this.state = {
-      loaded:false,
-      items:[]
+      url:"http://localhost:3001/scenario"
     }
   }
-  async componentDidMount(){
-    const rawData = await fetch("http://localhost:3001/scenario");
-    const data = await rawData.json();
-    this.setState({
-      items:data,
-      loaded:true
-    })
-    console.log("load")
+
+  update (e) {
+    this.setState({value: e.target.value})
   }
+
+  query (value) {
+    let undefind
+    if(value === undefind){
+      value = ""
+    }
+    let url = value
+    url = "http://localhost:3001/scenario/"+url
+    return url
+  }
+
+  submit (e) {
+    this.setState({url: this.query(this.state.value)})
+    e.preventDefault()
+  }
+
   render(){
     return (
-      this.state.loaded ?
-      <div>
-      {this.state.items.map(t=><ScenarioCard title={t.title} date={t.date} path={t.path} user={t.user}/>)}
-      </div>
-      : <div> now loading ... </div>
+        <div>
+          <form onSubmit={e => this.submit(e)}>
+            <input type='text' value={this.state.value} onChange={e => this.update(e)} />
+            <input type='submit' value='send'/>
+          </form>
+
+          {this.state.url}
+
+          <ScenarioCardList url={this.state.url}/>
+        </div>
     )
   }
 }
-/*
-    {te.map((t)=>
-      <ScenarioCard title={t.title} date={t.date} path={t.path} user={t.user}/>
-    )}
-  </div>
-)*/
 export default Scenario;

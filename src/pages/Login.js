@@ -1,18 +1,60 @@
 import React, { Component } from 'react';
-const Login = () => (
-  <div className="login-form">
-    <form>
-      <div>
-        <label for="email">email</label>
-        <input type="text" id="email" name="email"/>
+
+class Login extends React.Component{
+
+  constructor(){
+    super();
+    this.state = {
+      email:"",
+      pass:"",
+      test:""
+    }
+  }
+
+  emailUpdate (e) {
+    this.setState({email: e.target.value})
+  }
+  passUpdate (e) {
+    this.setState({pass: e.target.value})
+  }
+  submit (e) {
+    this.setState({
+      test:this.state.email + this.state.pass
+    })
+
+    fetch("url", {
+      method: 'POST',
+      body: {'email':this.state.email,'pass':this.state.pass}
+    })
+    .catch((e) => {
+      throw Error(e);
+    })
+    .then(response => {
+      if(response.status != 404){
+        localStorage.setItem('json', response.json());
+      }
+    })
+    e.preventDefault()
+  }
+
+  render(){
+    return(
+      <div className='Signup-form'>
+        <form onSubmit={e => this.submit(e)}>
+          <div>
+            <label>email</label>
+            <input type='text' value={this.state.email} onChange={e => this.emailUpdate(e)} />
+          </div>
+          <div>
+            <label>pass</label>
+            <input type='pass' value={this.state.pass} onChange={e => this.passUpdate(e)} />
+          </div>
+          <input type='submit' value='send'/>
+        </form>
+        {this.state.test}
       </div>
-      <div>
-        <label for="pass">pass</label>
-        <input type="pass" id="pass" name="pass"/>
-      </div>
-      <input type='submit' value='ログイン'/>
-    </form>
-  </div>
-);
+    )
+  }
+}
 
 export default Login;
