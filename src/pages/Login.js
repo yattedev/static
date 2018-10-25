@@ -8,7 +8,7 @@ class Login extends React.Component{
       email:"",
       pass:"",
       test:"",
-      url:"http://localhost:3000/login"
+      url:"http://localhost:3000/sgin_in"
     }
   }
 
