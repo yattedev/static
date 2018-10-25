@@ -7,7 +7,8 @@ class Login extends React.Component{
     this.state = {
       email:"",
       pass:"",
-      test:""
+      test:"",
+      url:"http://localhost:3000/login"
     }
   }
 
@@ -22,16 +23,23 @@ class Login extends React.Component{
       test:this.state.email + this.state.pass
     })
 
-    fetch("url", {
+    fetch(this.state.url, {
+      headers: new Headers({
+        'Content-Type':'applicatuib/json'
+      }),
       method: 'POST',
-      body: {'email':this.state.email,'pass':this.state.pass}
+      body: JSON.stringify({'email':this.state.email,'pass':this.state.pass})
     })
     .catch((e) => {
       throw Error(e);
     })
-    .then(response => {
-      if(response.status != 404){
-        localStorage.setItem('json', response.json());
+    .then(res => {
+      if(res.status != 404){
+        res.json()
+        .then(json => {
+          console.log(json)
+          localStorage.setItem('json',json());
+        })
       }
     })
     e.preventDefault()
