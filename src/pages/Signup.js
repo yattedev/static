@@ -28,7 +28,7 @@ class Login extends React.Component{
         'Content-Type':'applicatuib/json'
       }),
       method: 'POST',
-      body: JSON.stringify({'email':this.state.email,'pass':this.state.pass})
+      body: JSON.stringify({'email':this.state.email,'password':this.state.pass})
     })
     .catch((e) => {
       throw Error(e);
