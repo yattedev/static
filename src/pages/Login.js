@@ -8,7 +8,8 @@ class Login extends React.Component{
       email:"",
       pass:"",
       test:"",
-      url:"http://localhost:3000/auth/sign_in"
+      url:"https://wadawada.herokuapp.com/auth/sign_in"
+      //url:"http://localhost:3000/auth/sign_in"
     }
   }
 
@@ -25,21 +26,34 @@ class Login extends React.Component{
 
     fetch(this.state.url, {
       headers: new Headers({
-        'Content-Type':'applicatuib/json'
+        'Content-Type':'application/json'
       }),
       method: 'POST',
-      body: JSON.stringify({'email':this.state.email,'pass':this.state.pass})
+      body: JSON.stringify({'email':this.state.email,'password':this.state.pass})
     })
     .catch((e) => {
       throw Error(e);
     })
     .then(res => {
-      if(res.status != 404){
-        res.json()
-        .then(json => {
-          console.log(json)
-          localStorage.setItem('json',json());
-        })
+      switch (res.status) {
+        case 401:
+          this.setState({test:res.status})
+          res.json()
+          .then(function(json){
+            console.log(json.errors)
+          })
+          break;
+
+        default:
+          const json = {
+            'access-token':res.headers.get('access-token'),
+            'expiry':res.headers.get('expiry'),
+            'token-type':res.headers.get('token-type'),
+            'uid':res.headers.get('uid'),
+            'client':res.headers.get('client')
+          }
+          this.setState({test: JSON.stringify(json)})
+          localStorage.setItem('loginData',JSON.stringify(json));
       }
     })
     e.preventDefault()
@@ -48,6 +62,7 @@ class Login extends React.Component{
   render(){
     return(
       <div className='Signup-form'>
+      {this.state.test}
         <form onSubmit={e => this.submit(e)}>
           <div>
             <label>email</label>
@@ -55,11 +70,10 @@ class Login extends React.Component{
           </div>
           <div>
             <label>pass</label>
-            <input type='pass' value={this.state.pass} onChange={e => this.passUpdate(e)} />
+            <input type='password' value={this.state.pass} onChange={e => this.passUpdate(e)} />
           </div>
           <input type='submit' value='send'/>
         </form>
-        {this.state.test}
       </div>
     )
   }

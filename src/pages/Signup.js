@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Login extends React.Component{
+class Signup extends React.Component{
 
   constructor(){
     super();
@@ -8,7 +8,8 @@ class Login extends React.Component{
       email:"",
       pass:"",
       test:"",
-      url:"http://localhost:3000/auth"
+      url:"https://wadawada.herokuapp.com/auth"
+      //url:"http://localhost:3000/auth/sign_in"
     }
   }
 
@@ -33,15 +34,6 @@ class Login extends React.Component{
     .catch((e) => {
       throw Error(e);
     })
-    .then(res => {
-      if(res.status != 404){
-        res.json()
-        .then(json => {
-          console.log(json)
-          localStorage.setItem('json',json());
-        })
-      }
-    })
     e.preventDefault()
   }
 
@@ -55,14 +47,13 @@ class Login extends React.Component{
           </div>
           <div>
             <label>pass</label>
-            <input type='pass' value={this.state.pass} onChange={e => this.passUpdate(e)} />
+            <input type='password' value={this.state.pass} onChange={e => this.passUpdate(e)} />
           </div>
           <input type='submit' value='send'/>
         </form>
-        {this.state.test}
       </div>
     )
   }
 }
 
-export default Login;
+export default Signup;
