@@ -24,7 +24,7 @@ class App extends React.Component{
                 <li><Link to='/playlog'>プレイログ</Link></li>
               </div>
             </Auth>
-            <li><Link to='/login'>ログイン</Link></li>
+            <li><Link to='/signin'>ログイン</Link></li>
             <li><Link to='/signup'>サインアップ</Link></li>
           </ul>
 
@@ -37,7 +37,7 @@ class App extends React.Component{
                 <Route path='/playlog' component={Playlog} />
               </div>
             </Auth>
-            <Route path='/login' component={Login} />
+            <Route path='/signin' component={Signin} />
             <Route path='/signup' component={Signup} />
           </div>
         </div>
