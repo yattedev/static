@@ -7,17 +7,18 @@ class ScenarioCard extends Component{
     return(
       <div className="scenario-card">
         <div className="title">
-          {this.props.title}
+          title : {this.props.item.title}
         </div>
-        <div className="date">
-          {this.props.date}
+        <div className="user_name">
+          name : {this.props.item.user_name}
         </div>
         <div className="path">
-          {this.props.path}
+          file_path : {this.props.item.file_path}
         </div>
         <div className="user">
-          {this.props.user}
+          test : {JSON.stringify(this.props.item)}
         </div>
+        <br/>
       </div>
     )
   }

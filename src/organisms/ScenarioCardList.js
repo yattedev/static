@@ -11,7 +11,16 @@ class ScenarioCardList extends React.Component{
   }
   async componentDidMount () {
     //http://localhost:3001/scenario
-    const rawData = await fetch(this.props.url);
+    const loginData = JSON.parse(localStorage.getItem('loginData'))
+    const rawData = await fetch(this.props.url,{
+      method: 'GET', // or 'PUT'
+      headers:{
+        'access-token':loginData['access-token'],
+        'expiry':loginData['expiry'],
+        'token-type':loginData['token-type'],
+        'uid':loginData['uid'],
+        'client':loginData['client']
+      }});
     const data = await rawData.json();
     this.setState({
       items:data,
@@ -20,7 +29,17 @@ class ScenarioCardList extends React.Component{
   }
   async componentDidUpdate(){
     //http://localhost:3001/scenario
-    const rawData = await fetch(this.props.url);
+    const loginData = JSON.parse(localStorage.getItem('loginData'))
+    const rawData = await fetch(this.props.url,{
+      method: 'GET', // or 'PUT'
+      headers:{
+        'access-token':loginData['access-token'],
+        'expiry':loginData['expiry'],
+        'token-type':loginData['token-type'],
+        'uid':loginData['uid'],
+        'client':loginData['client']
+      }}
+    );
     const data = await rawData.json();
     this.setState({
       items:data,
@@ -31,7 +50,7 @@ class ScenarioCardList extends React.Component{
     return (
       this.state.loaded ?
       <div>
-        {this.state.items.map(item=><ScenarioCard title={item.title} date={item.date} path={item.path} user={item.user}/>)}
+        {this.state.items.map(item=><ScenarioCard item={item}/>)}
       </div>
       : <div> now loading ... </div>
     )

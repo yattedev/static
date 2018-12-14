@@ -16,9 +16,11 @@ class Signin extends React.Component{
   emailUpdate (e) {
     this.setState({email: e.target.value})
   }
+
   passUpdate (e) {
     this.setState({pass: e.target.value})
   }
+
   submit (e) {
     this.setState({
       test:this.state.email + this.state.pass
@@ -52,7 +54,6 @@ class Signin extends React.Component{
             'uid':res.headers.get('uid'),
             'client':res.headers.get('client')
           }
-          this.setState({test: JSON.stringify(json)})
           localStorage.setItem('loginData',JSON.stringify(json));
       }
     })

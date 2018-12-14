@@ -4,8 +4,9 @@ import ScenarioCardList from '../organisms/ScenarioCardList'
 class Scenario extends React.Component{
   constructor(){
     super();
+    const loginData = localStorage.getItem('loginData')
     this.state = {
-      url:"http://localhost:3001/scenario"
+      url:"https://wadawada.herokuapp.com/scenarios"
     }
   }
 
@@ -19,7 +20,7 @@ class Scenario extends React.Component{
       value = ""
     }
     let url = value
-    url = "http://localhost:3001/scenario/"+url
+    url = "https://wadawada.herokuapp.com/scenarios?"+url
     return url
   }
 
@@ -35,12 +36,11 @@ class Scenario extends React.Component{
             <input type='text' value={this.state.value} onChange={e => this.update(e)} />
             <input type='submit' value='send'/>
           </form>
-
           {this.state.url}
-
           <ScenarioCardList url={this.state.url}/>
         </div>
     )
   }
 }
+
 export default Scenario;

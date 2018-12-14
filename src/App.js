@@ -6,8 +6,9 @@ import Home from './pages/Home'
 import User from './pages/User'
 import Scenario from './pages/Scenario'
 import Playlog from './pages/Playlog'
-import Login from './pages/Login'
+//import Login from './pages/Login'
 import Signup from './pages/Signup'
+import Signin from './pages/Signin'
 import Auth from './Auth'
 
 class App extends React.Component{
@@ -17,26 +18,17 @@ class App extends React.Component{
         <div>
           <ul>
             <li><Link to='/'>ホーム</Link></li>
-            <Auth>
-              <div>
-                <li><Link to='/user'>ユーザー</Link></li>
-                <li><Link to='/scenario'>シナリオ</Link></li>
-                <li><Link to='/playlog'>プレイログ</Link></li>
-              </div>
-            </Auth>
+            <li><Link to='/user'>ユーザー</Link></li>
+            <li><Link to='/scenario'>シナリオ</Link></li>
+            <li><Link to='/playlog'>プレイログ</Link></li>
             <li><Link to='/signin'>ログイン</Link></li>
             <li><Link to='/signup'>サインアップ</Link></li>
           </ul>
-
           <div>
             <Route exact path='/' component={Home}/>
-            <Auth>
-              <div>
-                <Route path='/user' component={User} />
-                <Route path='/scenario' component={Scenario} />
-                <Route path='/playlog' component={Playlog} />
-              </div>
-            </Auth>
+            <Route path='/user' component={User} />
+            <Route path='/scenario' component={Scenario} />
+            <Route path='/playlog' component={Playlog} />
             <Route path='/signin' component={Signin} />
             <Route path='/signup' component={Signup} />
           </div>
