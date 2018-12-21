@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import Header from '../molecules/Header';
+
 class Home extends React.Component{
   constructor(){
     super();
@@ -16,8 +18,11 @@ class Home extends React.Component{
 
   render(){
     return(
-      <div className='Home'>
-        {this.state.items}
+      <div>
+        <Header currentUrl='/' type={this.props.login}/>
+        <div className='Home'>
+          {this.state.items}
+        </div>
       </div>
     )
   }

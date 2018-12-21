@@ -27,7 +27,7 @@ class ScenarioCardList extends React.Component{
       loaded:true
     })
   }
-  async componentDidUpdate(){
+  async componentWillReceiveProps(){
     //http://localhost:3001/scenario
     const loginData = JSON.parse(localStorage.getItem('loginData'))
     const rawData = await fetch(this.props.url,{
@@ -46,6 +46,7 @@ class ScenarioCardList extends React.Component{
       loaded:rawData.ok
     })
   }
+
   render(){
     return (
       this.state.loaded ?

@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 
+import Header from '../molecules/Header';
+import LoginForm from '../molecules/LoginForm';
+
 class Signin extends React.Component{
 
   constructor(){
     super();
     this.state = {
+      loading : false,
       email:"",
       pass:"",
       test:"",
@@ -23,7 +27,8 @@ class Signin extends React.Component{
 
   submit (e) {
     this.setState({
-      test:this.state.email + this.state.pass
+      test:this.state.email + this.state.pass,
+      loading : true
     })
 
     fetch(this.state.url, {
@@ -56,27 +61,30 @@ class Signin extends React.Component{
           }
           localStorage.setItem('loginData',JSON.stringify(json));
       }
+    }).then(function(){
+      window.location.href = "http://localhost:3000/home";
     })
     e.preventDefault()
   }
 
   render(){
-    return(
-      <div className='Signup-form'>
-      {this.state.test}
-        <form onSubmit={e => this.submit(e)}>
-          <div>
-            <label>email</label>
-            <input type='text' value={this.state.email} onChange={e => this.emailUpdate(e)} />
-          </div>
-          <div>
-            <label>pass</label>
-            <input type='password' value={this.state.pass} onChange={e => this.passUpdate(e)} />
-          </div>
-          <input type='submit' value='send'/>
-        </form>
-      </div>
-    )
+    if(!this.state.loading){
+      return(
+        <div>
+          <Header currentUrl='/signin' type={this.props.login}/>
+
+          <LoginForm submitFunc={e => this.submit(e)}
+            emailUpdate={e => this.emailUpdate(e)}
+            passUpdate={e => this.passUpdate(e)}
+            state={{email:this.state.email,pass:this.state.pass}}
+          />
+        </div>
+      )
+    }else{
+      return(
+        <div>Please wait</div>
+      )
+    }
   }
 }
 

@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import Header from '../molecules/Header';
+import LoginForm from '../molecules/LoginForm';
+
 
 class Signup extends React.Component{
 
@@ -19,9 +22,11 @@ class Signup extends React.Component{
   passUpdate (e) {
     this.setState({pass: e.target.value})
   }
+
   submit (e) {
     this.setState({
-      test:this.state.email + this.state.pass
+      test:this.state.email + this.state.pass,
+      loading : true
     })
 
     fetch(this.state.url, {
@@ -34,25 +39,50 @@ class Signup extends React.Component{
     .catch((e) => {
       throw Error(e);
     })
+    .then(res => {
+      switch (res.status) {
+        case 401:
+          this.setState({test:res.status})
+          res.json()
+          .then(function(json){
+            console.log(json.errors)
+          })
+          break;
+
+        default:
+          const json = {
+            'access-token':res.headers.get('access-token'),
+            'expiry':res.headers.get('expiry'),
+            'token-type':res.headers.get('token-type'),
+            'uid':res.headers.get('uid'),
+            'client':res.headers.get('client')
+          }
+          localStorage.setItem('loginData',JSON.stringify(json));
+      }
+    }).then(function(){
+      window.location.href = "http://localhost:3000/home";
+    })
     e.preventDefault()
   }
 
   render(){
-    return(
-      <div className='Signup-form'>
-        <form onSubmit={e => this.submit(e)}>
-          <div>
-            <label>email</label>
-            <input type='text' value={this.state.email} onChange={e => this.emailUpdate(e)} />
-          </div>
-          <div>
-            <label>pass</label>
-            <input type='password' value={this.state.pass} onChange={e => this.passUpdate(e)} />
-          </div>
-          <input type='submit' value='send'/>
-        </form>
-      </div>
-    )
+    if(!this.state.loading){
+      return(
+        <div>
+          <Header currentUrl='/signup' type={this.props.login}/>
+
+          <LoginForm submitFunc={e => this.submit(e)}
+            emailUpdate={e => this.emailUpdate(e)}
+            passUpdate={e => this.passUpdate(e)}
+            state={{email:this.state.email,pass:this.state.pass}}
+          />
+        </div>
+      )
+    }else{
+      return(
+        <div>Please wait</div>
+      )
+    }
   }
 }
 
