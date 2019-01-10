@@ -9,6 +9,7 @@ import Playlog from './pages/Playlog'
 import Signup from './pages/Signup'
 import Signin from './pages/Signin'
 import Logout from './pages/Logout'
+import Game from './pages/Game'
 
 const login = !(!localStorage.getItem('loginData'))
 
@@ -26,6 +27,7 @@ class App extends React.Component{
           <Route path='/signin' render={() => <Signin login={login} />} />
           <Route path='/signup' render={() => <Signup login={login} />} />
           <Route path='/logout' render={() => <Logout login={login} />} />
+          <Route path='/game' render={() => <Game login={login} />} />
         </div>
       </BrowserRouter>
     )
