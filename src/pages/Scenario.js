@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ScenarioArea from '../organisms/ScenarioArea'
 import Header from '../molecules/Header'
 

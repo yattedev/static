@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Link ,Switch} from 'react-router-dom'
+import React from 'react';
+import { BrowserRouter, Route} from 'react-router-dom'
 
 import Home from './pages/Home'
 import User from './pages/User'
@@ -10,8 +9,6 @@ import Playlog from './pages/Playlog'
 import Signup from './pages/Signup'
 import Signin from './pages/Signin'
 import Logout from './pages/Logout'
-import Auth from './Auth'
-import Unauth from './Unauth'
 
 const login = !(!localStorage.getItem('loginData'))
 

@@ -1,6 +1,4 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { Redirect, Route } from 'react-router-dom';
+import React from 'react';
 
 class Auth extends React.Component{
 

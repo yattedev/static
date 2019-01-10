@@ -14,10 +14,12 @@ class Header extends Component{
     return(
       <div className="header">
         {t.map( t => {
-          if(this.props.type == t.type || t.type == "all"){
+          if(this.props.type === t.type || t.type === "all"){
             return <Link style={(this.props.currentUrl === t.url) ? {margin:"20px",pointerEvents:"none",color:"black",textDecoration:"none"} : {margin:"20px"}} to={t.url}>
-            {t.name}
+              {t.name}
             </Link>
+          } else {
+            return null
           }
         })}
       </div>

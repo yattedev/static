@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ScenarioCard from '../molecules/ScenarioCard'
 
 class ScenarioCardList extends React.Component{

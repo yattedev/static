@@ -6,7 +6,7 @@ class ScenarioArea extends Component{
 
   constructor(){
     super();
-    const loginData = localStorage.getItem('loginData')
+    //const loginData = localStorage.getItem('loginData')
     this.state = {
       url:"https://wadawada.herokuapp.com/scenarios"
     }

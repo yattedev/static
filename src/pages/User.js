@@ -1,6 +1,4 @@
-import React, { Component } from 'react';
-import Header from '../molecules/Header';
-
+import React from 'react';
 
 const User = () => (
   <div className="user">
