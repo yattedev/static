@@ -1,10 +1,9 @@
 <Root>
-    <!--Rectangle id="foo" x="0" y="0" width="800" height="600" color="black" /-->
     <Picture id="background" x="0" y="0" width="800" height="600" src="office.jpg" />
-    <!--Rectangle id="0" x="300" y="300" width="50" height="50" color="green" /-->
-    <!--Rectangle id="1" x="400" y="400" width="50" height="50" color="blue" /-->
-    <Picture id="3" x="0" y="0" width="360" height="750" src="josei_09_b_a.png" />
-    <MessageBox id="message" x="0" y="400" width="800" height="200" />
+    <Picture id="3" x="0" y="0" width="360" height="750" src="men02.png" />
+    <Picture id="phone" x="440" y="20" width="300" height="540" src="phone.png" />
+    <Rectangle id="phone_back" x="440" y="20" width="260" height="500" color="white" />
+    <MessageBox id="message" x="0" y="500" width="800" height="100" />
     <Button id="sel1" x="200" y="100" width="400" height="64" text="Yes" goto="start" pushstate="true" inactive="true" />
     <Button id="sel2" x="200" y="200" width="400" height="64" text="No" inactive="true" />
 </Root>
