@@ -1,0 +1,5 @@
+<Root>
+    <Picture id="background" x="0" y="0" width="800" height="600" src="title1.jpg" />
+    <Button id="sel1" x="200" y="100" width="400" height="64" text="ゲームスタート" goto="gamestart" />
+    <Button id="sel2" x="200" y="200" width="400" height="64" text="？？？？" goto="hatena" />
+</Root>

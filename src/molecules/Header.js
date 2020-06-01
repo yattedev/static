@@ -6,7 +6,8 @@ const t = [{name:'home',url:'/',type:'all'},
   {name:'playlog',url:'/playlog',type:true},
   {name:'logout',url:'/logout',type:true},
   {name:'signin',url:'/signin',type:false},
-  {name:'signup',url:'/signup',type:false}
+  {name:'signup',url:'/signup',type:false},
+  {name:'game',url:'/game',type:false}
 ]
 
 class Header extends Component{
